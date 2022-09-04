@@ -17,7 +17,7 @@ void main() async {
   ));
 }
 
-class BuscaAcoes extends StatefulWidget {
+class BuscaAcoes extends StatefulWidget { 
   @override
   State<BuscaAcoes> createState() => _BuscaAcoesState();
 }
@@ -97,19 +97,22 @@ class _BuscaAcoesState extends State<BuscaAcoes> {
                     if (snapshot.hasError) {
                       return Container();
                     } else {
-                      // _search;
+                    if (_search != null){
                       var valor = snapshot.data["results"][_search.toUpperCase()]["price"];
-                      var codigo = (snapshot.data["results"][_search.toUpperCase()]["symbol"]);
-                      codigo = codigo + ' - ' + snapshot.data["results"][_search.toUpperCase()]["company_name"];
+                      var codigo = snapshot.data["results"][_search.toUpperCase()]["symbol"];
+                      codigo = codigo + ' - ' +  snapshot.data["results"][_search.toUpperCase()]["company_name"];
                       return Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         Text (codigo),
                         Text('R\$ $valor'), 
-                        //Text()
                       ]
                     );
+
+                    } else {
+                      return Container();
                     }
+                  }
                 }
               })
         ],
